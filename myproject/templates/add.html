@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block mein %}
+    <form method="POST">{% csrf_token %}
+    <table align="center">
+    <tr>
+        <td>标题</td>
+        <td><input type="text" name="title"></td>
+    </tr>
+    <tr>
+        <td>简介</td>
+        <td><input type="text" name="desc"></td>
+    </tr>
+    <tr>
+        <td>内容</td>
+        <td><textarea name="content" cols="30" rows="10" style="resize: none"></textarea></td>
+    </tr>
+    <tr>
+        <td>链接</td>
+        <td><input type="text" name="link"></td>
+    </tr>
+        <tr>
+        <td></td>
+        <td><input type="submit" value="保存"></td>
+    </tr>
+    </table>
+    </form>
+{% endblock %}

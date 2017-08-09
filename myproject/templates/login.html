@@ -1,0 +1,45 @@
+
+{% load staticfiles %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<link href="{% static 'css/signin.css' %}" rel="stylesheet">
+		<link href="{% static 'css/reglogin.css' %}" rel='stylesheet' type='text/css' />
+        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="main">
+		<div class="header" >
+			<h1>Login!</h1>
+		</div>
+		<p></p>
+			<form action="{% url 'login' %}" method="post">
+				<ul class="right-form">
+					<h2 class="form-signin-heading">Login:</h2>
+					<input id="inputEmail" class="form-control" name="username" type="text" placeholder="Username" required/>
+					<input id="inputPassword" class="form-control" name="password" type="password" placeholder="Password" required/>
+                    <br/>
+                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+					<div class="clear"> </div>
+				</ul>
+				<div class="clear"> </div>
+                <input type="hidden" name="next" value="{{ req.GET.next }}">
+                {% csrf_token %}
+			</form>
+	</div>
+    <div style="display: none">{{ log_err }}</div>
+<script type="text/javascript">
+    var err = '{{ log_err }}'
+    if (err) {
+        alert(err)
+    }
+</script>
+</body>
+</html>
+
+

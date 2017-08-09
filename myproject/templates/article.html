@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block mein %}
+    <div class="postdate">
+
+        <div class="month">{{ article.data_publish | date:'m' }}</div>
+        <div class="date">{{ article.data_publish | date:'d' }}</div>
+    </div>
+    <div class="title">
+        <h2><a href="" rel="bookmark" title="{{ article.title }}">{{ article.title }}</a></h2>
+        <div class="postmeta">
+            <span class="postmeta_author">{{ req.user.username }}</span>
+            <span class="postmeta_time">{{ article.data_publish | date:'Y-m-d' }}</span>
+        </div><!-- end postmeta -->
+    </div>
+        <div class="entry">
+
+        <form action="?aid={{ article.id }}" method="POST">
+            {% csrf_token %}
+           <textarea name="tex" cols="30" rows="10" style="resize: none">{{ article.content |safe }}</textarea>
+            <p><input type="submit" value="保存" name="submite"></p>
+
+
+        </form>
+        </div>
+        {% for tag in article.tag.all %}
+            <span class="tags"><a href="?tag={{ tag.id }}" rel="tag">{{ tag.name }}</a>
+        </span>
+        {% endfor %}
+        <div class="info">
+            本文链接: <a href="article/?aid={{ article.id }}" rel="bookmark"
+                     title="{{ article.title }}">{{ article.link }}</a>
+        </div>
+           <div> <h3 id="comments"><span class="commentsnumber">only 1 comment</span> untill now</h3></div>
+
+    </div>
+    <script>
+
+    </script>
+
+ {% endblock %}

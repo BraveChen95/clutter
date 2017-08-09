@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block mein %}
+
+    <!-- banner代码 结束 -->
+    <div class="topnews">
+      <h2>最新文章 | <a href="add">增加文章</a></h2>
+
+        {% for article in articles %}
+        <div class="blogs">
+        <ul>
+          <h3><a href="{% url 'article' %}?aid={{ article.id }}">{{ article.title}}</a></h3>
+          <p>{{ article.desc }} ...</p>
+
+          <p class="autor"><span class="lm f_l">
+              {% for tag in article.tag.all %}
+                    <a href="/">{{ tag.name }}</a>
+              {% endfor %}
+
+
+          </span><span class="dtime f_l">{{ article.data_publish |date:'Y-m-d' }}</span>
+          <span class="viewnum f_r"><a href="delete/?did={{ article.id }}">删除</a></span>
+{#          <span class="pingl f_r">评论（<a href="/">{{ article.comment_set.count }}</a>）</span></p>#}
+        </ul>
+      </div>
+        {% endfor %}
+    </div>
+{% include 'page.html' %}
+
+{% endblock %}
+
